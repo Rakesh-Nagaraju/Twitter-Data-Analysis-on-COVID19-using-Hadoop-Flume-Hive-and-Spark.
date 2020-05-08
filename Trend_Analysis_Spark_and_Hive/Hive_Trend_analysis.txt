@@ -1,0 +1,16 @@
+
+//If not already executed, please execute following code.
+//Table to Store Twitter JSON Data.
+CREATE EXTERNAL TABLE covid_raw_tweets(id BIGINT,created_at STRING,source STRING,favorited BOOLEAN, retweeted_status STRUCT<text:STRING, `user` :STRUCT<screen_name:STRING,name:STRING>,retweet_count:INT>,text STRING,entities STRUCT<hashtags:ARRAY<STRUCT<text:STRING>>>,`user` STRUCT<screen_name:STRING,friends_count:INT,followers_count:INT,statuses_count:INT,verified:BOOLEAN,utc_offset:INT,time_zone:STRING>,in_reply_to_screen_name STRING)
+ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+
+// Load the data from HDFS Path to the above created Table.
+load data inpath '/user/maria_dev/covid_data_day (1)' into TABLE covid_raw_tweets;
+
+
+//View to filter only the hashtags text.
+create view hash1 as select id, entities.hashtags.text as words from covid_raw_tweet;
+//Split multiple hashtags into single hashtags.
+create view hash2 as select id, word from hash1 lateral view explode( words ) dummy as word ;
+//Count and store the trends in the final table.
+create table tweets_Trend_final stored as orc as select count(*) as count from hash2 group by word order by count; 	

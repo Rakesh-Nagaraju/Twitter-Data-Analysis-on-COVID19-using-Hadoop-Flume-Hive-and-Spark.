@@ -1,0 +1,33 @@
+//Table to Store Twitter JSON Data.
+CREATE EXTERNAL TABLE covid_raw_tweets(id BIGINT,created_at STRING,source STRING,favorited BOOLEAN, retweeted_status STRUCT<text:STRING, `user` :STRUCT<screen_name:STRING,name:STRING>,retweet_count:INT>,text STRING,entities STRUCT<hashtags:ARRAY<STRUCT<text:STRING>>>,`user` STRUCT<screen_name:STRING,friends_count:INT,followers_count:INT,statuses_count:INT,verified:BOOLEAN,utc_offset:INT,time_zone:STRING>,in_reply_to_screen_name STRING)
+ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+
+
+// Load the data from HDFS Path to the above created Table.
+load data inpath '/user/maria_dev/covid_data_day (1)' into TABLE covid_raw_tweets;
+
+//Divide text into words.
+create view temp_1 as select id,covid_raw_tweets.text, words from covid_raw_tweets lateral view explode(sentences(lower(text))) dummy as words;
+
+//Divide words into single word row.
+create view temp_2 as select id,temp_1.text, word from temp_1 lateral view explode( words ) dummy as word ;
+
+//Calculate Polarity by joining with dictionary.
+create view temp_3 as select
+    id,temp_2.text,
+    temp_2.word,
+    case s_d.polarity
+      when  'negative' then -1
+      when 'positive' then 1
+      else 0 end as polarity
+ from temp_2 left outer join dictionary s_d on temp_2.word = s_d.word;
+
+
+//Sum single word polarity value for every single user based on UsedId and assign sentiment.
+create table tweets_sent_final stored as orc as select
+  id,
+    case
+    when sum(polarity) > 0 then 'positive'
+    when sum(polarity) < 0 then 'negative'
+    else 'neutral' end as sentiment,text
+ from temp_3 group by id, text;
