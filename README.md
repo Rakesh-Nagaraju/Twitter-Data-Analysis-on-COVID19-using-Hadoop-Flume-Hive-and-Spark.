@@ -61,6 +61,8 @@ Performance Analysis:
 Performance analysis includes comparing the hive and spark approaches to determine which approach is faster in processing the data. We store the time taken to execute queries in the hive and also the time is taken by spark on the same amount of data and varying them. Finally, plot a graph based on this data to a better approach.
 
 # Implementation
+# NOTE: 
+        Make the FilePath changes as per your systems location or store the files as per the locations in this implementation.
 # Signing up a Twitter developer account
 In order to get Twitter data for sentiment and trend analysis, we need to sign up for a developer account and create an application.
 Open developer.twitter.com/en/apps and create an app. Fill in all required fields for our purpose of using the Twitter data to the Twitter team. 
