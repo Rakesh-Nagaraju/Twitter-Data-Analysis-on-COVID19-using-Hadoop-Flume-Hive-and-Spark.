@@ -8,7 +8,7 @@ The main objective of this project is to generate Twitter data and use it to fin
 By analyzing the tweets/sentiment/hashtags, we can find out and understand the views of people on a specific topic of interest. However, the amount of data that has to be processed and stored in a database is challenging, analyzing the data for the sentiment and performance is also a challenging task. The direct benefit of this project will be any twitter account holder who wants to analyze the sentiment or trend analysis of other people on any topic including or excluding COVID19.
 
 
-  Functional requirements 
+# Functional requirements 
 The functional requirements are as follows:
 The system should be able to extract Twitter data and store it in HDFS for further analysis.
 The system should be able to process new tweets stored in the database after retrieval.
@@ -17,7 +17,7 @@ Calculate the sentiment of a tweet and store in the database, for later querying
 The system should be able to determine the recent trend pattern among the given data.
 Finally, plot a graph to analyze the performance of the hive and spark approaches in querying databases.
 
-  Non-functional requirements 
+# Non-functional requirements 
 Performance requirements: We need to detect if the system crashed or hanged, also in case of an operating system error occurred. We need to make sure to keep track of the system's performance in terms of efficiency of integration. 
 
 Safety requirements: The operation of the database ‘s backups should take place weekly in case of possible loss, damage, or harm that could result from system issues. 
@@ -28,7 +28,7 @@ Quality Attributes
 Reliability: The project should deliver all the solutions mentioned in this project to the user. The solution should be tested, debugged completely, and is available and executing perfectly. If there are any errors or exceptions, they should be handled.
 Accuracy: The result should be accurate and be able to prove the concept of the project.
 
-Software and Hardware Requirements
+# Software and Hardware Requirements
 Server/System Software Requirement
 Host Operation System: Windows / IOS 
 Guest Operating System(Virtual Machine): Ubuntu 18.04.4 LTS
@@ -41,13 +41,13 @@ Apache Hive
 Apache Spark 
 Twitter API
 
-Hardware Configuration
+# Hardware Configuration
 Processor:  Core  i3 or higher processor system
 RAM: 8 GB or higher
 Hard-disk: 100 GB or above
 Platform: Ubuntu
 
-Analysis 
+# Analysis 
 Sentiment analysis: 
 Sentiment analysis is a process of determining the attitude of the mass id positive, negative or neutral towards the subject of interest. First, using Hive, we move unstructured data obtained in JSON format into structured format Hive tables. We also fetch a dictionary file. Then, we execute queries to create multiple views by combining the data with the dictionary words to determine the tweet’s polarity. The polarity includes:
 Positive: the tweet mentions positive connotations or has a positive/happy attitude. The positive sentiment has to be more dominant if the tweet includes more than one sentiment.
@@ -60,16 +60,16 @@ A tweet will be always attached to multiple ‘#’(hashtags) and trend analysis
 Performance Analysis: 
 Performance analysis includes comparing the hive and spark approaches to determine which approach is faster in processing the data. We store the time taken to execute queries in the hive and also the time is taken by spark on the same amount of data and varying them. Finally, plot a graph based on this data to a better approach.
 
- Implementation
- Signing up a Twitter developer account
+# Implementation
+# Signing up a Twitter developer account
 In order to get Twitter data for sentiment and trend analysis, we need to sign up for a developer account and create an application.
 Open developer.twitter.com/en/apps and create an app. Fill in all required fields for our purpose of using the Twitter data to the Twitter team. 
 After the request got approved from the Twitter reviewing team, we were granted consumer key, consumer secret, access token, and access token secret.
 
- Setting up the virtual environment
+# Setting up the virtual environment
 The installation of Hadoop, Flume, Hive, and Spark is easier and less hassle in Linux OS. Since we have either Windows or MAC operating systems, the team set up a virtual environment using a 3rd party application called VMWare workstation player or Oracle virtual box.
 
-Configuring/ starting Flume Agent:
+# Configuring/ starting Flume Agent:
 Steps to install and run Apache Flume,Hadoop services 
 
 1.	Both Apache flume and Hadoop File System(HDFS) work seamlessly on Linux Operating System so it is recommended for the user to have  Flume Agent and HDFS installed on Linux Operating System. However with the users who are using Mac or Windows they need to install any virtual machine application such as VMware Workstation Pro or Oracle Virtual Box. For our project, we have installed VMware workstation pro. One can download the VMware workstation pro setup file  from the following link https://www.vmware.com/products/workstation-pro.html . Once the file is downloaded one can just setup the software following the steps displayed on the screen .
@@ -168,126 +168,128 @@ If  the browser redirects to the welcome page of Hadoop system then it is confir
 
 
 
-Hive Installation:
-1.	Verifying JAVA Installation ($ java -version)
-2.	Verifying Hadoop Installation ($ hadoop version)
-3.	Download Hive from http://apache.petsads.us/hive/hive-0.14.0/.
-4.	Make sure Hive is installed and HDFS, Hadoop is configured.
-5.	Extracting and verifying Hive Archive
-6.	$ tar zxvf apache-hive-0.14.0-bin.tar.gz
-7.	Copy the extracted files to local directory
-8.	Set up the Hive environment by copying the following path in ~/.bashrc file.
-9.	export HIVE_HOME=/usr/local/hive
-10.	export PATH=$PATH:$HIVE_HOME/bin
-11.	export CLASSPATH=$CLASSPATH:/usr/local/Hadoop/lib/*:.
-12.	export CLASSPATH=$CLASSPATH:/usr/local/hive/lib/*:.
-13.	Execute $ source ~/.bashrc to run the .bashrc file.
-14.	Configuring Hive
-15.	To configure Hive with Hadoop, we edit the “hive-env.sh file”, located in the $HIVE_HOME/conf directory. 
-16.	The following commands redirect to Hive config folder and copy the template file:
-$ cd $HIVE_HOME/conf
-$ cp hive-env.sh.template hive-env.sh
-17.	Edit the hive-env.sh file by appending the following line: 
-export HADOOP_HOME=/usr/local/hadoop
-18.	Hive installation is completed
+# Hive Installation:
+Verifying JAVA Installation ($ java -version)
+Verifying Hadoop Installation ($ hadoop version)
+Download Hive from http://apache.petsads.us/hive/hive-0.14.0/.
+Make sure Hive is installed and HDFS, Hadoop is configured.
+Extracting and verifying Hive Archive
+ $ tar zxvf apache-hive-0.14.0-bin.tar.gz
+Copy the extracted files to local directory
+Set up the Hive environment by copying the following path in ~/.bashrc file.
+ export HIVE_HOME=/usr/local/hive
+ export PATH=$PATH:$HIVE_HOME/bin
+ export CLASSPATH=$CLASSPATH:/usr/local/Hadoop/lib/*:.
+ export CLASSPATH=$CLASSPATH:/usr/local/hive/lib/*:.
+Execute $ source ~/.bashrc to run the .bashrc file.
+
+# Configuring Hive
+To configure Hive with Hadoop, we edit the “hive-env.sh file”, located in the $HIVE_HOME/conf directory. 
+The following commands redirect to Hive config folder and copy the template file:
+ $ cd $HIVE_HOME/conf
+ $ cp hive-env.sh.template hive-env.sh
+
+Edit the hive-env.sh file by appending the following line: 
+ export HADOOP_HOME=/usr/local/hadoop
+ Hive installation is completed
 But we also need an external DB server to configure the Metastore, hence we also install Apache Derby. 
-Downloading Apache Derby:
-19.	Download the file using following command:
-$ wget http://archive.apache.org/dist/db/derby/db-derby-10.4.2.0/db-derby-10.4.2.0-bin.tar.gz
 
-20.	Extracting and verifying Derby archive
-$ tar zxvf db-derby-10.4.2.0-bin.tar.gz
+# Downloading Apache Derby:
+Download the file using following command:
+ $ wget http://archive.apache.org/dist/db/derby/db-derby-10.4.2.0/db-derby-10.4.2.0-bin.tar.gz
 
-21.	Copy the files to /usr/local/derby directory using the cp command.
+Extracting and verifying Derby archive
+ $ tar zxvf db-derby-10.4.2.0-bin.tar.gz
 
-22.	Setting up the environment for Derby : edit the ~/.bashrc file and enter the following lines.
-export DERBY_HOME=/usr/local/derby
-export PATH=$PATH:$DERBY_HOME/bin
-Apache Hive
-18
-export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar.
+Copy the files to /usr/local/derby directory using the cp command.
 
-23.	Create a directory to store Metastore
-$ mkdir $DERBY_HOME/data
+Setting up the environment for Derby : edit the ~/.bashrc file and enter the following lines.
+ export DERBY_HOME=/usr/local/derby
+ export PATH=$PATH:$DERBY_HOME/bin
+ Apache Hive
+ 18
+ export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar.
 
-24.	Configuring Metastore of Hive:
+Create a directory to store Metastore
+ $ mkdir $DERBY_HOME/data
+
+Configuring Metastore of Hive:
 Configuring Metastore means specifying to Hive where the database is stored. You can do this by editing the hive-site.xml file, which is in the $HIVE_HOME/conf directory. First of all, copy the template file using the following command:
-$ cd $HIVE_HOME/conf
-$ cp hive-default.xml.template hive-site.xml
+ $ cd $HIVE_HOME/conf
+ $ cp hive-default.xml.template hive-site.xml
 
-25.	Edit hive-site.xml and append the following lines :
+Edit hive-site.xml and append the following lines :
  <property>
    <name>javax.jdo.option.ConnectionURL</name>
    <value>jdbc:derby://localhost:1527/metastore_db;create=true </value>
    <description>JDBC connect string for a JDBC metastore </description>
-</property>
+ </property>
 
-26.	Create a file named jpox.properties and add the following lines into it:
-javax.jdo.PersistenceManagerFactoryClass =
+Create a file named jpox.properties and add the following lines into it:
+ javax.jdo.PersistenceManagerFactoryClass =
+ org.jpox.PersistenceManagerFactoryImpl
+ org.jpox.autoCreateSchema = false
+ org.jpox.validateTables = false
+ org.jpox.validateColumns = false
+ org.jpox.validateConstraints = false
+ org.jpox.storeManagerType = rdbms
+ org.jpox.autoCreateSchema = true
+ org.jpox.autoStartMechanismMode = checked
+ org.jpox.transactionIsolation = read_committed
+ javax.jdo.option.DetachAllOnCommit = true
+ javax.jdo.option.NontransactionalRead = true
+ javax.jdo.option.ConnectionDriverName = org.apache.derby.jdbc.ClientDriver
+ javax.jdo.option.ConnectionURL = jdbc:derby://hadoop1:1527/metastore_db;create = true
+ javax.jdo.option.ConnectionUserName = APP
+ javax.jdo.option.ConnectionPassword = mine
 
-org.jpox.PersistenceManagerFactoryImpl
-org.jpox.autoCreateSchema = false
-org.jpox.validateTables = false
-org.jpox.validateColumns = false
-org.jpox.validateConstraints = false
-org.jpox.storeManagerType = rdbms
-org.jpox.autoCreateSchema = true
-org.jpox.autoStartMechanismMode = checked
-org.jpox.transactionIsolation = read_committed
-javax.jdo.option.DetachAllOnCommit = true
-javax.jdo.option.NontransactionalRead = true
-javax.jdo.option.ConnectionDriverName = org.apache.derby.jdbc.ClientDriver
-javax.jdo.option.ConnectionURL = jdbc:derby://hadoop1:1527/metastore_db;create = true
-javax.jdo.option.ConnectionUserName = APP
-javax.jdo.option.ConnectionPassword = mine
+# Verifying Hive Installation: 
+Before running Hive, you need to create the /tmp folder and a separate Hive folder in HDFS. Here, we use the /user/hive/warehouse folder. You need to set write permission for these newly created folders as shown below: chmod g+w
 
-27.	Verifying Hive Installation: Before running Hive, you need to create the /tmp folder and a separate Hive folder in HDFS. Here, we use the /user/hive/warehouse folder. You need to set write permission for these newly created folders as shown below: chmod g+w
+Now set them in HDFS before verifying Hive. Use the following commands:
+ $ $HADOOP_HOME/bin/hadoop fs -mkdir /tmp 
+ $ $HADOOP_HOME/bin/hadoop fs -mkdir /user/hive/warehouse
+ $ $HADOOP_HOME/bin/hadoop fs -chmod g+w /tmp 
+ $ $HADOOP_HOME/bin/hadoop fs -chmod g+w /user/hive/warehouse
 
-28.	Now set them in HDFS before verifying Hive. Use the following commands:
-$ $HADOOP_HOME/bin/hadoop fs -mkdir /tmp 
-$ $HADOOP_HOME/bin/hadoop fs -mkdir /user/hive/warehouse
-$ $HADOOP_HOME/bin/hadoop fs -chmod g+w /tmp 
-$ $HADOOP_HOME/bin/hadoop fs -chmod g+w /user/hive/warehouse
+The following commands are used to verify Hive installation:
+ $ cd $HIVE_HOME
+ $ bin/hive
 
-29.	The following commands are used to verify Hive installation:
-$ cd $HIVE_HOME
-$ bin/hive
+On successful Installation and running the above command, you should see the Hive Terminal.
 
-30.	On successful Installation and running the above command, you should see the Hive Terminal.
+On the Other Hand, we can also download HDP Sandbox 3.0, which is a virtual machine for using HDFS, Hive and other services. More at: https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html.
 
-31.	On the Other Hand, we can also download HDP Sandbox 3.0, which is a virtual machine for using HDFS, Hive and other services. More at: https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html.
-
-32.	For more queries regarding this Installation, please follow: https://www.tutorialspoint.com/hive/hive_installation.html
+For more queries regarding this Installation, please follow: https://www.tutorialspoint.com/hive/hive_installation.html
 
 
 
-Spark Installation:
+# Spark Installation:
 
-1.	Verifying Java Installation
-$java -version
+Verifying Java Installation
+ $java -version
 	
-2.	Downloading Scala
+Downloading Scala
 Download the latest version of Scala from https://www.scala-lang.org/download/ . 
 
-3.	Installing Scala
-Extract the Scala tar file : $ tar xvf scala-2.11.6.tgz
-Set PATH for Scala : $ export PATH = $PATH:/usr/local/scala/bi
+Installing Scala
+ Extract the Scala tar file : $ tar xvf scala-2.11.6.tgz
+ Set PATH for Scala : $ export PATH = $PATH:/usr/local/scala/bi
 
-4.	 Verifying Scala installation
-$scala -version
+Verifying Scala installation
+ $scala -version
 
-5.	Downloading Apache Spark
-Download the latest version of Spark by visiting https://spark.apache.org/downloads.html.
+Downloading Apache Spark
+ Download the latest version of Spark by visiting https://spark.apache.org/downloads.html.
 
-6.	Installing Spark: Extracting Spark tar file using the command below:
-$ tar xvf spark-1.3.1-bin-hadoop2.6.tgz 
+Installing Spark: Extracting Spark tar file using the command below:
+ $ tar xvf spark-1.3.1-bin-hadoop2.6.tgz 
 
-7.	Moving Spark software files: Use following commands for moving the Spark software files to respective directory (/usr/local/spark).
-$ su – 
-Password:  
-# cd /home/Hadoop/Downloads/ 
-# mv spark-1.3.1-bin-hadoop2.6 /usr/local/spark 
-# exit 
+Moving Spark software files: Use following commands for moving the Spark software files to respective directory (/usr/local/spark).
+ $ su – Password:  
+ #cd /home/Hadoop/Downloads/ 
+ #mv spark-1.3.1-bin-hadoop2.6 /usr/local/spark 
+ #exit 
 
 8.	Setting up the environment for Spark by adding the following line to ~/.bashrc file.
 export PATH=$PATH:/usr/local/spark/bin
